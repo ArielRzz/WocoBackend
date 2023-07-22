@@ -20,12 +20,15 @@ spring:
     show-sql: true
 
 ---
+
+port: ${MYSQLPORT}
+
 spring:
   config:
     activate:
       on-profile: prod
   datasource:
-    url : jdbc:mysql://${MYSQLHOST}:${MYSQLPORT}/${MYSQLDATABASE}
+    url : {MYSQL_URL}
     username : ${MYSQLUSER}
     password : ${MYSQLPASSWORD}
     name: woco
