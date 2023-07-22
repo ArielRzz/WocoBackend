@@ -1,6 +1,4 @@
 package com.nocountry.woco.model.entity;
-
-import com.nocountry.woco.auth.model.entity.UserEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

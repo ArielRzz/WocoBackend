@@ -1,5 +1,6 @@
 package com.nocountry.woco.service.impl;
 
+import com.nocountry.woco.enums.EnumService;
 import com.nocountry.woco.mapper.CoworkMapper;
 import com.nocountry.woco.model.dto.CoworkDto;
 import com.nocountry.woco.model.entity.Cowork;
@@ -7,7 +8,6 @@ import com.nocountry.woco.model.exception.ResourceNotFoundException;
 import com.nocountry.woco.model.repository.CoworkRepository;
 import com.nocountry.woco.service.CoworkService;
 import com.nocountry.woco.service.spec.CoworkSpecification;
-import com.nocountry.woco.utils.enums.EnumService;
 import jakarta.persistence.criteria.Expression;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.jpa.domain.Specification;
@@ -26,7 +26,7 @@ public class CoworkServiceImpl implements CoworkService {
 
     private  CoworkMapper coworkMapper;
 
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
     public CoworkServiceImpl(CoworkRepository coworkRepository, ModelMapper modelMapper) {
         this.coworkRepository = coworkRepository;
