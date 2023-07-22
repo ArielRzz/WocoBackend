@@ -1,34 +1,18 @@
-port: 8080
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  info:
+    env:
+      enabled: true
+
+info:
+  application:
+    name: woco-back
+    description: REST API
+    author: ----------------
+    version: '@project.version@'
 spring:
   profiles:
     active: prod
-
-
----
-spring:
-  config:
-    activate:
-      on-profile: dev
-  datasource:
-    driverClassName: com.mysql.cj.jdbc.Driver
-    password: ${MYSQLDB_ROOT_PASSWORD}
-    url: jdbc:mysql://localhost:3306/woco
-    username: ${MYSQLDB_USER}
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
-
----
-
-port: ${MYSQLPORT}
-
-spring:
-  config:
-    activate:
-      on-profile: prod
-  datasource:
-    url : {MYSQL_URL}
-    username : ${MYSQLUSER}
-    password : ${MYSQLPASSWORD}
-    name: woco

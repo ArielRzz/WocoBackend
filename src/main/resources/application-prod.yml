@@ -3,9 +3,6 @@ spring:
     activate:
       on-profile: prod
   datasource:
-    url : jdbc:mysql://${MYSQLHOST}:${MYSQLPORT}/${MYSQLDATABASE}
+    url : jdbc:mysql://root:d6D5ajHx4R8zHaRCMA0B@containers-us-west-94.railway.app:5647/railway
     username : ${MYSQLUSER}
     password : ${MYSQLPASSWORD}
-    name: woco
-  profile:
-#    active: prod

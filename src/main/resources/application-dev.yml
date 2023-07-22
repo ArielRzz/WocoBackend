@@ -1,0 +1,13 @@
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    password: ${MYSQLDB_ROOT_PASSWORD}
+    url: jdbc:mysql://localhost:3306/woco
+    username: ${MYSQLDB_USER}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
