@@ -59,11 +59,4 @@ public class ServiceService implements IServiceService {
         Services existingService = serviceRepository.findById(id).get();
         serviceRepository.delete(existingService);
     }
-    @Override
-    public List<ServiceResponse> getServicesByPrice(Double price) {
-        List<Services> servicesList = serviceRepository.findAllByPrice(price);
-        return servicesList.stream().map(service ->
-                modelMapper.map(service, ServiceResponse.class)).collect(Collectors.toList());
-
-    }
 }

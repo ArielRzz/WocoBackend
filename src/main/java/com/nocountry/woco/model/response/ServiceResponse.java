@@ -8,5 +8,4 @@ import lombok.Setter;
 public class ServiceResponse {
     private Long id;
     private String name;
-    private Double price;
 }

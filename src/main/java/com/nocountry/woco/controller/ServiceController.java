@@ -36,9 +36,4 @@ public class ServiceController {
         serviceService.deleteService(id);
     }
 
-    @GetMapping("/price/{price}")
-    public List<ServiceResponse> getServicesByPrice(@PathVariable Double price) {
-        return serviceService.getServicesByPrice(price);
-    }
-
 }

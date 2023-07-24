@@ -11,6 +11,4 @@ public interface IServiceService {
     ServiceResponse getServiceById(Long id);
     ServiceResponse addService(ServiceRequest service);
     ServiceResponse updateService(Long id, ServiceRequest serviceRequest);
-    void deleteService(Long id);
-    List<ServiceResponse> getServicesByPrice(Double price);
-}
+    void deleteService(Long id);}
