@@ -13,6 +13,7 @@ info:
     description: REST API
     author: ----------------
     version: '@project.version@'
+# change this profile to enable mode development/production
 spring:
   profiles:
     active: prod

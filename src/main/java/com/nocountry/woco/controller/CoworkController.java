@@ -16,7 +16,6 @@ import java.util.List;
 @RequestMapping("/api/coworks")
 @RequiredArgsConstructor
 public class CoworkController {
-
     private final CoworkService coworkService;
 
         @GetMapping()
