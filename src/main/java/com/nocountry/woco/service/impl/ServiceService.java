@@ -1,5 +1,6 @@
 package com.nocountry.woco.service.impl;
 
+import com.nocountry.woco.exception.NotFoundException;
 import com.nocountry.woco.model.entity.Services;
 import com.nocountry.woco.model.repository.ServiceRepository;
 import com.nocountry.woco.model.request.ServiceRequest;
@@ -35,7 +36,10 @@ public class ServiceService implements IServiceService {
         if (service.isPresent()) {
             return modelMapper.map(service, ServiceResponse.class);
         }
-        return null;
+        else{
+            throw new NotFoundException( "Service with id " + id + " not found");
+        }
+
     }
     @Override
     public ServiceResponse addService(ServiceRequest serviceRequest) {
@@ -44,14 +48,13 @@ public class ServiceService implements IServiceService {
     }
     @Override
     public ServiceResponse updateService(Long id, ServiceRequest serviceRequest) {
-        Services existingService = serviceRepository.findById(id).orElse(null);
-        if (existingService != null) {
-            modelMapper.getConfiguration().setSkipNullEnabled(true);
+        if( serviceRepository.findById(id).isPresent()){
+            Services existingService = serviceRepository.findById(id).get();
             modelMapper.map(serviceRequest, existingService);
             return modelMapper.map(serviceRepository.save(existingService), ServiceResponse.class);
         }
         else{
-            return null;
+            throw new NotFoundException( "Service with id " + id + " not found");
         }
     }
     @Override
