@@ -28,8 +28,6 @@ public class ServiceController {
             @ApiResponse(responseCode = "200", description = "Found the service",
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = Services.class)) }),
-            @ApiResponse(responseCode = "400", description = "Invalid id supplied",
-                    content = @Content),
             @ApiResponse(responseCode = "404", description = "Service not found",
                     content = @Content) })
     @GetMapping
@@ -57,9 +55,8 @@ public class ServiceController {
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = Services.class)) }),
             @ApiResponse(responseCode = "400", description = "Invalid id supplied",
-                    content = @Content),
-            @ApiResponse(responseCode = "404", description = "Service not found",
-                    content = @Content) })
+                    content = @Content)
+    })
     @PostMapping
     public ServiceResponse addService(@RequestBody ServiceRequest serviceRequest) {
         return serviceService.addService(serviceRequest);
@@ -83,7 +80,7 @@ public class ServiceController {
                     content = @Content),
             @ApiResponse(responseCode = "400", description = "Invalid id supplied",
                     content = @Content),
-            @ApiResponse(responseCode = "404", description = "Service not found",
+            @ApiResponse(responseCode = "204", description = "Service deleted",
                     content = @Content) })
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteService(@PathVariable Long id) {

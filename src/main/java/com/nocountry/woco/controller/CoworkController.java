@@ -4,6 +4,9 @@ import com.nocountry.woco.model.dto.CoworkDto;
 import com.nocountry.woco.model.entity.Cowork;
 import com.nocountry.woco.model.exception.ResourceNotFoundException;
 import com.nocountry.woco.service.CoworkService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +21,11 @@ import java.util.List;
 public class CoworkController {
     private final CoworkService coworkService;
 
+    @Operation(summary = "Get all coworks", description = "Get all coworks")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error"),
+            @ApiResponse(responseCode = "404", description = "Not Found")})
         @GetMapping()
         public ResponseEntity<List<CoworkDto>> getAll() {
             try {
@@ -28,24 +36,48 @@ public class CoworkController {
             }
         }
 
+        @Operation( summary = "Get cowork by id", description = "Get cowork by id")
+        @ApiResponses(value = {
+                @ApiResponse(responseCode = "200", description = "OK"),
+                @ApiResponse(responseCode = "500", description = "Internal Server Error"),
+                @ApiResponse(responseCode = "404", description = "Not Found")
+        })
         @GetMapping("/{id}")
         public ResponseEntity<CoworkDto> getById(@PathVariable int id) throws ResourceNotFoundException {
             CoworkDto response = coworkService.getById(id);
             return new ResponseEntity<>(response, HttpStatus.OK);
         }
 
+        @Operation(summary = "Create cowork", description = "Create cowork")
+        @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Created"),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error"),
+            @ApiResponse(responseCode = "404", description = "Not Found")
+        })
         @PostMapping("/")
         public ResponseEntity<CoworkDto> post(@RequestBody Cowork cowork) {
             CoworkDto createdCowork = coworkService.post(cowork);
             return ResponseEntity.status(HttpStatus.CREATED).body(createdCowork);
         }
 
+        @Operation(summary = "Update cowork", description = "Update cowork")
+        @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error"),
+            @ApiResponse(responseCode = "404", description = "Not Found")
+        })
         @PatchMapping("/{id}")
         public ResponseEntity<CoworkDto> patch(@PathVariable int id, @RequestBody Cowork cowork) throws ResourceNotFoundException {
             CoworkDto updatedCowork = coworkService.patch(id, cowork);
             return ResponseEntity.ok(updatedCowork);
         }
 
+        @Operation(summary = "Delete cowork", description = "Delete cowork")
+        @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error"),
+            @ApiResponse(responseCode = "404", description = "Not Found")
+        })
         @DeleteMapping("/{id}")
         public ResponseEntity<?> delete(@PathVariable int id) throws ResourceNotFoundException {
             coworkService.delete(id);
@@ -53,6 +85,12 @@ public class CoworkController {
                     .body("Cowork deleted");
         }
 
+        @Operation( summary = "Get cowork by services", description = "Get cowork by services")
+        @ApiResponses(value = {
+                @ApiResponse(responseCode = "200", description = "OK"),
+                @ApiResponse(responseCode = "500", description = "Internal Server Error"),
+                @ApiResponse(responseCode = "404", description = "Not Found")
+        })
         @GetMapping("/locations/{id}")
         public ResponseEntity<List<CoworkDto>> getByLocation(@PathVariable int id) throws ResourceNotFoundException {
             try {
@@ -63,6 +101,12 @@ public class CoworkController {
             }
         }
 
+        @Operation( summary = "Get cowork by services", description = "Get cowork by services")
+        @ApiResponses(value = {
+                @ApiResponse(responseCode = "200", description = "OK"),
+                @ApiResponse(responseCode = "500", description = "Internal Server Error"),
+                @ApiResponse(responseCode = "404", description = "Not Found")
+        })
         @GetMapping("/services/{id}")
         public ResponseEntity<List<CoworkDto>> getByService(@PathVariable int id) throws ResourceNotFoundException {
             try {
@@ -73,6 +117,12 @@ public class CoworkController {
             }
         }
 
+        @Operation( summary = "Get cowork by services", description = "Get cowork by services")
+        @ApiResponses(value = {
+                @ApiResponse(responseCode = "200", description = "OK"),
+                @ApiResponse(responseCode = "500", description = "Internal Server Error"),
+                @ApiResponse(responseCode = "404", description = "Not Found")
+        })
         @GetMapping("/name")
         public ResponseEntity<List<CoworkDto>> findByNameContaining(@RequestParam String name) {
             try {
@@ -83,6 +133,12 @@ public class CoworkController {
             }
         }
 
+        @Operation( summary = "Get cowork by latitude,longitude and distance", description = "Get cowork by latitude,longitude and distance")
+        @ApiResponses(value = {
+                @ApiResponse(responseCode = "200", description = "OK"),
+                @ApiResponse(responseCode = "500", description = "Internal Server Error"),
+                @ApiResponse(responseCode = "404", description = "Not Found")
+        })
         @GetMapping("/find")
         public ResponseEntity<List<CoworkDto>> findByLatitudeLongitudeAndDistance(@RequestParam float latitude, @RequestParam float longitude, @RequestParam float distance) {
             try {
@@ -103,6 +159,12 @@ public class CoworkController {
             }
         }
 
+        @Operation( summary = "Get cowork by services and location", description = "Get cowork by services and location")
+        @ApiResponses( value = {
+                @ApiResponse(responseCode = "200", description = "OK"),
+                @ApiResponse(responseCode = "500", description = "Internal Server Error"),
+                @ApiResponse(responseCode = "404", description = "Not Found")
+        })
         @GetMapping("/find/city")
         public ResponseEntity<List<CoworkDto>> findByCategoryIdAndCityId(@RequestParam int serviceId, @RequestParam int locationId) {
             try {
@@ -113,6 +175,12 @@ public class CoworkController {
             }
         }
 
+        @Operation(summary = "Get cowork by filters", description = "Get cowork by filters")
+        @ApiResponses(value = {
+                @ApiResponse(responseCode = "200", description = "OK"),
+                @ApiResponse(responseCode = "500", description = "Internal Server Error"),
+                @ApiResponse(responseCode = "404", description = "Not Found")
+        })
     @GetMapping("/filters")
     public ResponseEntity<List<CoworkDto>> getCoworksByFilters(
             @RequestParam(required = false) boolean betters,

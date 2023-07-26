@@ -16,4 +16,4 @@ info:
 # change this profile to enable mode development/production
 spring:
   profiles:
-    active: dev
+    active: prod
